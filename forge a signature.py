@@ -3,10 +3,12 @@ import random
 def Coprime(a, b):
     while a != 0:
         a, b = b % a, a
-    return b
+    if b != 1 and b != -1:
+        return 1
+    return 0
 
 def gcd(a, m):
-    if Coprime(a, m) != 1 and Coprime(a, m) != -1:
+    if Coprime(a, m):
         return None
     u1, u2, u3 = 1, 0, a
     v1, v2, v3 = 0, 1, m
@@ -28,12 +30,9 @@ def T_add(P,Q):
         bbb=gcd(2*P[1],p)
         k=(aaa*bbb)%p 
     else:
-        if (Coprime(P[0] - Q[0], p) != 1 and Coprime(P[0] - Q[0], p) != -1):
-            return 0
-        else:
-            aaa=(P[1]-Q[1])
-            bbb=(P[0]-Q[0])
-            k=(aaa*gcd(bbb,p))%p 
+        aaa=(P[1]-Q[1])
+        bbb=(P[0]-Q[0])
+        k=(aaa*gcd(bbb,p))%p 
 
     Rx=(pow(k,2)-P[0] - Q[0]) %p
     Ry=(k*(P[0]-Rx) - P[1])%p
